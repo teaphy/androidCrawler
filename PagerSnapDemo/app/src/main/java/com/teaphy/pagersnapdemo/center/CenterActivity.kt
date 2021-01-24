@@ -6,17 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.SizeUtils
 import com.teaphy.pagersnapdemo.CustomAdapter
-import com.teaphy.pagersnapdemo.snap.CustomPagerSnapHelper
+import com.teaphy.pagersnapdemo.snap.CustomLinearSnapHelper
 import com.teaphy.pagersnapdemo.snap.Gravity
 import com.teaphy.pagersnapdemo.R
-import com.teaphy.pagersnapdemo.start.StartSpacesItemDecoration
 
 class CenterActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
     private val listData = listOf<String>("A", "B", "C", "D", "E", "F", "G")
 
-    private val snapHelper = CustomPagerSnapHelper(gravity = Gravity.center)
+    private val snapHelper = CustomLinearSnapHelper(gravity = Gravity.center)
 
     private val customAdapter: CustomAdapter by lazy {
         CustomAdapter(listData, limitOffset)

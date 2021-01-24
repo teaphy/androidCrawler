@@ -13,7 +13,7 @@ import kotlin.math.roundToInt
  * 支持star、end、center
  * 根据不同的Gravity，选择不同的RecyclerView的ItemDecoration
  */
-class CustomPagerSnapHelper(var gravity: Gravity = Gravity.center) :
+class CustomLinearSnapHelper(var gravity: Gravity = Gravity.center) :
     SnapHelper() {
 
     private val INVALID_DISTANCE = 1f
