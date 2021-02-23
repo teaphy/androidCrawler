@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/lifecycle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoLifecycle"
+        android:text="生命周期" />
+
+    <Button
+        android:id="@+id/hide_or_show_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoHideOrShow"
+        android:text="生命周期：hide or show"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/static_load_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoStaticLoad"
+        android:text="静态加载" />
+
+    <Button
+        android:id="@+id/static_load_multi_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoStaticLoadMulti"
+        android:text="静态加载 Multi"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/dynamic_load_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoDynamicLoad"
+        android:text="动态加载" />
+
+    <Button
+        android:id="@+id/dynamic_load_multi_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoDynamicLoadMulti"
+        android:text="动态加载Multi"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/lazy_load_multi_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoLazyLoadMulti"
+        android:text="hide + show + 动态lazy"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/view_pager_load_multi_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoViewPagerLoadMulti"
+        android:text="ViewPager"
+        android:textAllCaps="false" />
+</LinearLayout>
