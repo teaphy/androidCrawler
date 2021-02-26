@@ -24,6 +24,31 @@
         android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/lifecycle_replace_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoLifecycleReplace"
+        android:text="生命周期：replace"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/lifecycle_vp_state_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotLifecycleVpState"
+        android:text="生命周期：ViewPager FragmentStatePagerAdapter"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/lifecycle_vp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotLifecycleVp"
+        android:text="生命周期：ViewPager FragmentPagerAdapter"
+        android:textAllCaps="false" />
+
+
+    <Button
         android:id="@+id/static_load_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

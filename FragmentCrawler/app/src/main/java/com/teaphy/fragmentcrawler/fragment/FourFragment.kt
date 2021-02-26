@@ -1,4 +1,4 @@
-package com.teaphy.fragmentcrawler.lifecycle
+package com.teaphy.fragmentcrawler.fragment
 
 import android.app.Activity
 import android.content.Context
@@ -12,26 +12,23 @@ import com.teaphy.fragmentcrawler.R
 
 
 
-class LifecycleFragment : Fragment() {
+class FourFragment : Fragment() {
 
     private val TAG = javaClass.simpleName
-
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        log("onAttach - Activity")
-
-
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         log("onAttach - Context")
     }
 
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        log("onAttach - Activity")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         log("onCreate")
-        activity
     }
 
     override fun onCreateView(
@@ -39,7 +36,7 @@ class LifecycleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         log("onCreateView")
-        return inflater.inflate(R.layout.fragment_one, container, false)
+        return inflater.inflate(R.layout.fragment_four, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

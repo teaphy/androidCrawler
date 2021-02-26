@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.teaphy.fragmentcrawler.activity.*
-import com.teaphy.fragmentcrawler.lifecycle.HideOrShowActivity
-import com.teaphy.fragmentcrawler.lifecycle.LifecycleActivity
+import com.teaphy.fragmentcrawler.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +19,18 @@ class MainActivity : AppCompatActivity() {
 
     fun gotoHideOrShow(view: View) {
         startActivity(Intent(this, HideOrShowActivity::class.java))
+    }
+
+    fun gotoLifecycleReplace(view: View) {
+        startActivity(Intent(this, LifecycleReplaceActivity::class.java))
+    }
+
+    fun gotLifecycleVpState(view: View) {
+        startActivity(Intent(this, LifecycleVpStateActivity::class.java))
+    }
+
+    fun gotLifecycleVp(view: View) {
+        startActivity(Intent(this, LifecycleVpActivity::class.java))
     }
 
     fun gotoStaticLoad(view: View) {

@@ -3,6 +3,7 @@ package com.teaphy.fragmentcrawler.lifecycle
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Lifecycle
 import com.teaphy.fragmentcrawler.R
 
 class LifecycleActivity : AppCompatActivity() {
@@ -13,6 +14,18 @@ class LifecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         log("onCreate")
         setContentView(R.layout.activity_lifecycle)
+
+        setLifecycle()
+    }
+
+    private fun setLifecycle() {
+
+        val lifecycleFragment: LifecycleFragment = supportFragmentManager.findFragmentById(R.id.lifecyle_fragment) as LifecycleFragment
+        with(supportFragmentManager.beginTransaction()) {
+            // 此时设置Fragment的生命周期为Lifecycle.State.STARTED
+            setMaxLifecycle(lifecycleFragment, Lifecycle.State.STARTED)
+            commitAllowingStateLoss()
+        }
     }
 
     override fun onStart() {
