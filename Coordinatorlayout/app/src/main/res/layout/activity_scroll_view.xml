@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scroller_view.ScrollViewActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ns_layout_child"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/purple_200"
+        android:textColor="#FFFFFF"
+        app:layout_behavior="com.teaphy.coordinatorlayoutcrawler.scroller_view.ScrollViewBehavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="A\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\n"
+            android:textSize="20sp" />
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ns_layout_dependency"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="5dp"
+        android:background="@color/teal_200"
+        android:textColor="#FFFFFF">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="A\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\nA\nB\nC\nD\nE\nF\nG\n"
+            android:textSize="20sp" />
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

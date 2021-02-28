@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".move_view.MoveViewActivity">
+
+        <TextView
+            android:id="@+id/tv_layout_child"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:background="@color/purple_200"
+            android:gravity="center"
+            android:text="Child"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_behavior="com.teaphy.coordinatorlayoutcrawler.move_view.MoveViewBehavior" />
+
+        <TextView
+            android:id="@+id/tv_layout_dependency"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:text="Dependency"
+            android:textColor="#FFFFFF" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
