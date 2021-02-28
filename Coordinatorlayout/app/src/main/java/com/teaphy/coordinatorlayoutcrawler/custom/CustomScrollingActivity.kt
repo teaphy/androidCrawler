@@ -16,8 +16,6 @@ class CustomScrollingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
-
         setContentView(R.layout.activity_custom_scrolling)
 
 
@@ -27,9 +25,9 @@ class CustomScrollingActivity : AppCompatActivity() {
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
 
 
-        val tabLayout: TabLayout = findViewById(R.id.tabs);
-        tabLayout.addTab(tabLayout.newTab().setText("选项卡一"))
-        tabLayout.addTab(tabLayout.newTab().setText("选项卡二"))
-        tabLayout.addTab(tabLayout.newTab().setText("选项卡三"))
+//        val tabLayout: TabLayout = findViewById(R.id.tabs);
+//        tabLayout.addTab(tabLayout.newTab().setText("选项卡一"))
+//        tabLayout.addTab(tabLayout.newTab().setText("选项卡二"))
+//        tabLayout.addTab(tabLayout.newTab().setText("选项卡三"))
     }
 }
