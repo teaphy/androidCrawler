@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.teaphy.fragmentcrawler.activity.*
 import com.teaphy.fragmentcrawler.back_stack.BackStackActivity
+import com.teaphy.fragmentcrawler.communication.CommunicationActivity
 import com.teaphy.fragmentcrawler.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, BackStackActivity::class.java))
     }
 
+
+    fun gotoCommunication(view: View) {
+        startActivity(Intent(this, CommunicationActivity::class.java))
+    }
+
     fun gotoStaticLoad(view: View) {
         startActivity(Intent(this, StaticLoadActivity::class.java))
     }
@@ -61,5 +67,6 @@ class MainActivity : AppCompatActivity() {
     fun gotoViewPagerLoadMulti(view: View) {
         startActivity(Intent(this, ViewPagerLoadMultiActivity::class.java))
     }
+
 
 }

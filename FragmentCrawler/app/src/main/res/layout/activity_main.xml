@@ -55,6 +55,14 @@
         android:text="BackStack"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/communication_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoCommunication"
+        android:text="传递数据"
+        android:textAllCaps="false" />
+
 
     <Button
         android:id="@+id/static_load_button"

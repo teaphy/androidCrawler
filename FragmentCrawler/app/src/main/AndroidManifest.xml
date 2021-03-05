@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LazyFragment">
+        <activity android:name=".communication.CommunicationActivity"></activity>
         <activity
             android:name=".back_stack.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity android:name=".back_stack.BackStackActivity" />
         <activity android:name=".lifecycle.LifecycleVpStateActivity" />
         <activity android:name=".lifecycle.LifecycleVpActivity" />
