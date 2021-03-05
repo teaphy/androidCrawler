@@ -47,6 +47,14 @@
         android:text="生命周期：ViewPager FragmentPagerAdapter"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/back_stack_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoBackStack"
+        android:text="BackStack"
+        android:textAllCaps="false" />
+
 
     <Button
         android:id="@+id/static_load_button"

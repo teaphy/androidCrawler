@@ -25,7 +25,8 @@ class LifecycleReplaceActivity : AppCompatActivity() {
 
         with(supportFragmentManager.beginTransaction()) {
             replace(R.id.containerLayout, oneFragment!!)
-            commitNow()
+//            addToBackStack("one")
+            commit()
         }
     }
 
@@ -36,7 +37,12 @@ class LifecycleReplaceActivity : AppCompatActivity() {
 
         with(supportFragmentManager.beginTransaction()) {
             replace(R.id.containerLayout, twoFragment!!)
-            commitNow()
+//            addToBackStack("two")
+            commit()
         }
+    }
+
+    fun doPop(view: View) {
+        supportFragmentManager.popBackStackImmediate()
     }
 }

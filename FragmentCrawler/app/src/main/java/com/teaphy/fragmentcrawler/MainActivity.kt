@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.teaphy.fragmentcrawler.activity.*
+import com.teaphy.fragmentcrawler.back_stack.BackStackActivity
 import com.teaphy.fragmentcrawler.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, LifecycleVpActivity::class.java))
     }
 
+    fun gotoBackStack(view: View) {
+        startActivity(Intent(this, BackStackActivity::class.java))
+    }
+
     fun gotoStaticLoad(view: View) {
         startActivity(Intent(this, StaticLoadActivity::class.java))
     }
@@ -56,6 +61,5 @@ class MainActivity : AppCompatActivity() {
     fun gotoViewPagerLoadMulti(view: View) {
         startActivity(Intent(this, ViewPagerLoadMultiActivity::class.java))
     }
-
 
 }
