@@ -21,7 +21,7 @@
             app:collapsedTitleGravity="center"
             app:contentScrim="@android:color/holo_green_dark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:statusBarScrim="@android:color/holo_red_dark"
+            app:statusBarScrim="@android:color/holo_green_dark"
             app:toolbarId="@+id/toolbar">
 
             <ImageView
@@ -30,6 +30,8 @@
                 android:layout_height="200dp"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0"
                 android:src="@mipmap/icon_meinv"/>
 
             <androidx.appcompat.widget.Toolbar

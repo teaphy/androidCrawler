@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.teaphy.coordinatorlayoutcrawler.custom.CustomScrollingActivity
+import com.teaphy.coordinatorlayoutcrawler.custom.CustomScrollingParallaxActivity
 import com.teaphy.coordinatorlayoutcrawler.google.GoogleScrollingActivity
 import com.teaphy.coordinatorlayoutcrawler.move_view.MoveViewActivity
 import com.teaphy.coordinatorlayoutcrawler.scroller_view.ScrollViewActivity
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     fun gotoCustomScrolling(view: View) {
         startActivity(Intent(this, CustomScrollingActivity::class.java))
+    }
+
+    fun gotoCustomScrollingParallax(view: View) {
+        startActivity(Intent(this, CustomScrollingParallaxActivity::class.java))
     }
 
     fun gotoMoveView(view: View) {

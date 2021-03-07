@@ -24,6 +24,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="自定义 - Parallax"
+        android:textAllCaps="false"
+        android:onClick="gotoCustomScrollingParallax"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="MoveView"
         android:onClick="gotoMoveView"/>
 

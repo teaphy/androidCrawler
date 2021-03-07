@@ -12,12 +12,12 @@ import com.blankj.utilcode.util.BarUtils
 import com.google.android.material.tabs.TabLayout
 import com.teaphy.coordinatorlayoutcrawler.R
 
-class CustomScrollingActivity : AppCompatActivity() {
+class CustomScrollingParallaxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_custom_scrolling)
+        setContentView(R.layout.activity_custom_scrolling_parallax)
 
 
         BarUtils.transparentStatusBar(this)
