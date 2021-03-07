@@ -23,6 +23,11 @@
 
 
         <activity
+            android:name=".custom.CustomTitleBarActivity"
+            android:theme="@style/Theme.CoordinatorlayoutCrawler.NoActionBar" />
+
+
+        <activity
             android:name=".google.GoogleScrollingActivity"
             android:label="@string/title_activity_google_scrolling"
             android:theme="@style/Theme.CoordinatorlayoutCrawler.NoActionBar" />

@@ -28,10 +28,19 @@
         android:textAllCaps="false"
         android:onClick="gotoCustomScrollingParallax"/>
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义 - TitleBar"
+        android:textAllCaps="false"
+        android:onClick="gotoCustomTitleBar"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MoveView"
+        android:textAllCaps="false"
         android:onClick="gotoMoveView"/>
 
 
@@ -39,5 +48,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ScrollView"
+        android:textAllCaps="false"
         android:onClick="gotoScrollView"/>
 </LinearLayout>
