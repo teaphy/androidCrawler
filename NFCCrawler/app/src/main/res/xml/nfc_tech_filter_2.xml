@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 方式1 -->
+    <tech-list>
+        <tech>android.nfc.tech.MifareClassic</tech>
+        <tech>android.nfc.tech.NdefFormatable</tech>
+        <tech>android.nfc.tech.NfcA</tech>
+    </tech-list>
+
+    <!-- 方式2 -->
+    <tech-list>
+        <tech>android.nfc.tech.MifareClassic</tech>
+        <tech>android.nfc.tech.NfcA</tech>
+    </tech-list>
+
+    <!-- 方式3 -->
+    <tech-list>
+        <tech>android.nfc.tech.MifareClassic</tech>
+        <tech>android.nfc.tech.NfcA</tech>
+    </tech-list>
+</resource>
