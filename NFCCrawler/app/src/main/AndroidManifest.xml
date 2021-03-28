@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NFCCrawler">
+        <activity android:name=".reader.NfcReaderActivity" >
 
+        </activity>
+        <activity android:name=".nfc.TestCodeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,33 +25,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity android:name=".nfc.NFCActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.nfc.action.NDEF_DISCOVERED" />-->
 
-        <activity android:name=".nfc.NFCActivity">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.nfc.action.TECH_DISCOVERED" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.nfc.action.TAG_DISCOVERED" />-->
 
-                <data android:mimeType="text/plain" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
 
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+<!--            <meta-data-->
+<!--                android:name="android.nfc.action.TECH_DISCOVERED"-->
+<!--                android:resource="@xml/nfc_tech_filter" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
-            <intent-filter>
-
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
-        </activity>
+<!--        </activity>-->
     </application>
 
 </manifest>

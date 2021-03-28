@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.teaphy.nfccrawler.nfc.NFCActivity
+import com.teaphy.nfccrawler.reader.NfcReaderActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,5 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     fun gotoNFC(view: View) {
         startActivity(Intent(this, NFCActivity::class.java))
+    }
+
+    fun gotoNFCReader(view: View) {
+        startActivity(Intent(this, NfcReaderActivity::class.java))
     }
 }
