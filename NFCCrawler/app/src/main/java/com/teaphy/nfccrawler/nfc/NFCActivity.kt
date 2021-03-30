@@ -7,6 +7,7 @@ import android.nfc.*
 import android.nfc.NdefRecord
 import android.nfc.tech.MifareClassic
 import android.nfc.tech.MifareUltralight
+import android.nfc.tech.NfcA
 import android.nfc.tech.NfcF
 import android.os.Bundle
 import android.util.Log
@@ -137,6 +138,7 @@ class NFCActivity : AppCompatActivity() {
                 }
                 NfcAdapter.ACTION_TECH_DISCOVERED -> {
 
+
                     val nfcInfo = StringBuilder()
 
                     // Id
@@ -163,6 +165,9 @@ class NFCActivity : AppCompatActivity() {
                     // Sector check
                     val sectorCheck = java.lang.StringBuilder("Sector check: \n")
 
+                    // NfcA
+                    val nfcAMessage = java.lang.StringBuilder("NfcA: \n")
+
                     var idx = 0
 
                     // 获取所支持的所有标签类型
@@ -171,106 +176,7 @@ class NFCActivity : AppCompatActivity() {
                     for (tech in techList) {
                         when (tech) {
                             MifareClassic::class.java.name -> {
-                                // 根据Tag对象来获得MifareClassic对象；
-                                val mfc: MifareClassic = MifareClassic.get(tag)
-                                // 卡类型
-                                // 获得MifareClassic标签的具体类型：TYPE_CLASSIC，TYPE_PLUA，TYPE_PRO，TYPE_UNKNOWN
-                                when (mfc.type) {
-                                    MifareClassic.TYPE_CLASSIC -> cardType.append("Classic")
-                                    MifareClassic.TYPE_PLUS -> cardType.append("Plus")
-                                    MifareClassic.TYPE_PRO -> cardType.append("Pro")
-                                    MifareClassic.TYPE_UNKNOWN -> cardType.append("Unknown")
-                                }
-
-                                // getSectorCount()：获得标签总共有的扇区数量
-                                // getBlockCount()：获得标签总共有的的块数量
-                                // getSize()：获得标签的容量：SIZE_1K,SIZE_2K,SIZE_4K,SIZE_MINI
-                                with(sectorCheck) {
-                                    append("Sectors: ")
-                                    append(mfc.sectorCount)
-                                    append("\n")
-                                    append("Blocks: ")
-                                    append(mfc.blockCount)
-                                    append("\n")
-                                    append("Size: ")
-                                    append(mfc.size)
-                                    append(" Bytes")
-                                }
-
-                                try {
-
-                                    // 允许对MifareClassic标签进行IO操作
-                                    mfc.connect()
-
-                                    for (index in 0.until(mfc.sectorCount)) {
-                                        when {
-                                            // 验证当前扇区的KeyA密码，返回值为ture或false
-                                            mfc.authenticateSectorWithKeyA(
-                                                index,
-                                                MifareClassic.KEY_DEFAULT
-                                            ) -> {
-                                                sectorCheck.append("Sector <")
-                                                    .append(index)
-                                                    .append("> with KeyA auth succ\n")
-
-                                                // Read block of sector
-                                                // 当前扇区的第1块的块号
-                                                val blockIndex = mfc.sectorToBlock(index)
-
-                                                for (j in 0 until mfc.getBlockCountInSector(index)) {
-                                                    // 读取当前块的数据
-                                                    val blockData = mfc.readBlock(blockIndex + j)
-                                                    // 将数据data写入当前块；注意：data必须刚好是16Byte，末尾不能用0填充，应该用空格
-                                                    // writeBlock（int，data）
-                                                    sectorCheck.append("  Block <")
-                                                        .append(blockIndex + j)
-                                                        .append("> ")
-                                                        .append(
-                                                            StringUtils.encodeHexString(
-                                                                blockData,
-                                                                false
-                                                            )
-                                                        ).append("\n")
-                                                }
-                                            }
-                                            mfc.authenticateSectorWithKeyB(
-                                                index,
-                                                MifareClassic.KEY_DEFAULT
-                                            ) -> {
-                                                sectorCheck.append("Sector <").append(index)
-                                                    .append("> with KeyB auth succ\n")
-
-                                                // Read block of sector
-                                                val blockIndex = mfc.sectorToBlock(index)
-                                                for (j in 0 until mfc.getBlockCountInSector(index)) {
-                                                    val blockData = mfc.readBlock(blockIndex + j)
-                                                    sectorCheck.append("  Block <")
-                                                        .append(blockIndex + j).append("> ")
-                                                        .append(
-                                                            StringUtils.encodeHexString(
-                                                                blockData,
-                                                                false
-                                                            )
-                                                        ).append("\n")
-                                                }
-                                            }
-                                            else -> {
-                                                sectorCheck.append("Sector <").append(index)
-                                                    .append("> auth failed\n")
-                                            }
-                                        }
-                                    }
-
-                                } catch (e: IOException) {
-                                    e.printStackTrace();
-                                    Toast.makeText(
-                                        this@NFCActivity,
-                                        "Try again and keep NFC tag below device",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                } finally {
-                                    mfc.close()
-                                }
+                                handleMafareTech(tag, cardType, sectorCheck)
                             }
                             MifareUltralight::class.java.name -> {
                                 // Mifare Ultralight
@@ -280,6 +186,44 @@ class NFCActivity : AppCompatActivity() {
                                     MifareUltralight.TYPE_ULTRALIGHT_C -> cardType.append("Ultralight C")
                                     MifareUltralight.TYPE_UNKNOWN -> cardType.append("Unknown")
                                 }
+                            }
+                            NfcA::class.java.name -> {
+                                val nfca = NfcA.get(tag)
+                                nfcAMessage
+                                    .append(
+                                        "ATQA/SENS_RES: ${
+                                            StringUtils.encodeHexString(
+                                                nfca.atqa,
+                                                true
+                                            )
+                                        } \n"
+                                    )
+                                    .append("SAK/SEL_RES: ${nfca.sak} \n")
+
+                                // Tag
+//                                val tag: Tag = getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG) as Tag
+//                                val nfcA = NfcA.get(tag)
+//                                Thread {
+//                                    Log.e("teaphy", "开启NfcA")
+//                                    try {
+//                                        nfcA.connect()
+//
+//                                        // READ_CNT命令
+//                                        val readCntCmd = byteArrayOf(0x39)
+//
+//                                        val response = nfcA.transceive(readCntCmd)
+//                                        Log.e(
+//                                            "teaphy",
+//                                            "NfcA Response: ${StringUtils.encodeHexString(response, true)}"
+//                                        )
+//                                    } catch (e: IOException) {
+//                                        Log.e("teaphy", "NfcA Exception： $e")
+//                                    } finally {
+//                                        nfcA.close()
+//                                    }
+//
+//
+//                                }.run()
                             }
                         }
 
@@ -305,58 +249,16 @@ class NFCActivity : AppCompatActivity() {
 
                     val sbNdefMessages = java.lang.StringBuilder("NDEF Messages: \n")
 
-                    val rawMessages = getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+                    handleNdefMessage(sbNdefMessages)
 
-                    if (rawMessages != null) {
-                        val messages = arrayOfNulls<NdefMessage>(rawMessages.size)
-                        for (i in rawMessages.indices) {
-                            messages[i] = rawMessages[i] as NdefMessage
-                        }
-                        for (message in messages) {
-                            for (record in message!!.records) {
-                                if (record.tnf == NdefRecord.TNF_WELL_KNOWN) {
-                                    if (Arrays.equals(record.type, NdefRecord.RTD_TEXT)) {
-                                        try {
-                                            // NFC Forum "Text Record Type Definition" section 3.2.1.
-                                            val payload = record.payload
-                                            val textEncoding =
-                                                if ((payload[0] and 128.toByte()).toInt() == 0) "UTF-8" else "UTF-16"
-                                            val languageCodeLength: Int =
-                                                (payload[0] and 63.toByte()).toInt()
-                                            val languageCode =
-                                                String(
-                                                    payload,
-                                                    1,
-                                                    languageCodeLength,
-                                                    Charset.forName("US-ASCII")
-                                                )
-                                            val text = String(
-                                                payload,
-                                                languageCodeLength + 1,
-                                                payload.size - languageCodeLength - 1,
-                                                Charset.forName(textEncoding)
-                                            )
-                                            sbNdefMessages.append(" - ")
-                                                .append(languageCode)
-                                                .append(", ")
-                                                .append(textEncoding)
-                                                .append(", ")
-                                                .append(text)
-                                                .append("\n")
-                                        } catch (e: UnsupportedEncodingException) {
-                                            // should never happen unless we get a malformed tag.
-                                            throw IllegalArgumentException(e)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                     nfcInfo.append("\n")
                         .append(sbNdefMessages)
                         .append("\n")
                         .append("\n")
                         .append(sectorAndBlock)
+                        .append("\n")
+                        .append("\n")
+                        .append(nfcAMessage)
                         .append("\n")
                         .append("\n")
                         .append(sectorCheck)
@@ -365,6 +267,166 @@ class NFCActivity : AppCompatActivity() {
                     resultText.text = nfcInfo.toString()
                 }
             }
+        }
+    }
+
+    private fun Intent.handleNdefMessage(sbNdefMessages: java.lang.StringBuilder) {
+        val rawMessages = getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+
+        if (rawMessages != null) {
+            val messages = arrayOfNulls<NdefMessage>(rawMessages.size)
+            for (i in rawMessages.indices) {
+                messages[i] = rawMessages[i] as NdefMessage
+            }
+            for (message in messages) {
+                for (record in message!!.records) {
+                    if (record.tnf == NdefRecord.TNF_WELL_KNOWN) {
+                        if (Arrays.equals(record.type, NdefRecord.RTD_TEXT)) {
+                            try {
+                                // NFC Forum "Text Record Type Definition" section 3.2.1.
+                                val payload = record.payload
+                                val textEncoding =
+                                    if ((payload[0] and 128.toByte()).toInt() == 0) "UTF-8" else "UTF-16"
+                                val languageCodeLength: Int =
+                                    (payload[0] and 63.toByte()).toInt()
+                                val languageCode =
+                                    String(
+                                        payload,
+                                        1,
+                                        languageCodeLength,
+                                        Charset.forName("US-ASCII")
+                                    )
+                                val text = String(
+                                    payload,
+                                    languageCodeLength + 1,
+                                    payload.size - languageCodeLength - 1,
+                                    Charset.forName(textEncoding)
+                                )
+                                sbNdefMessages.append(" - ")
+                                    .append(languageCode)
+                                    .append(", ")
+                                    .append(textEncoding)
+                                    .append(", ")
+                                    .append(text)
+                                    .append("\n")
+                            } catch (e: UnsupportedEncodingException) {
+                                // should never happen unless we get a malformed tag.
+                                throw IllegalArgumentException(e)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleMafareTech(
+        tag: Tag,
+        cardType: StringBuilder,
+        sectorCheck: java.lang.StringBuilder
+    ) {
+        // 根据Tag对象来获得MifareClassic对象；
+        val mfc: MifareClassic = MifareClassic.get(tag)
+        // 卡类型
+        // 获得MifareClassic标签的具体类型：TYPE_CLASSIC，TYPE_PLUA，TYPE_PRO，TYPE_UNKNOWN
+        when (mfc.type) {
+            MifareClassic.TYPE_CLASSIC -> cardType.append("Classic")
+            MifareClassic.TYPE_PLUS -> cardType.append("Plus")
+            MifareClassic.TYPE_PRO -> cardType.append("Pro")
+            MifareClassic.TYPE_UNKNOWN -> cardType.append("Unknown")
+        }
+
+        // getSectorCount()：获得标签总共有的扇区数量
+        // getBlockCount()：获得标签总共有的的块数量
+        // getSize()：获得标签的容量：SIZE_1K,SIZE_2K,SIZE_4K,SIZE_MINI
+        with(sectorCheck) {
+            append("Sectors: ")
+            append(mfc.sectorCount)
+            append("\n")
+            append("Blocks: ")
+            append(mfc.blockCount)
+            append("\n")
+            append("Size: ")
+            append(mfc.size)
+            append(" Bytes")
+            append("\n")
+        }
+
+        try {
+
+            // 允许对MifareClassic标签进行IO操作
+            mfc.connect()
+
+            // 获取总扇区数
+            for (index in 0.until(mfc.sectorCount)) {
+                when {
+                    // 验证当前扇区的KeyA密码，返回值为ture或false
+                    mfc.authenticateSectorWithKeyA(
+                        index,
+                        MifareClassic.KEY_DEFAULT
+                    ) -> {
+                        sectorCheck.append("Sector <")
+                            .append(index)
+                            .append("> with KeyA auth succ\n")
+
+                        // Read block of sector
+                        // 当前扇区的第1块的块号
+                        val blockIndex = mfc.sectorToBlock(index)
+
+                        // 获取当前扇区的块数量
+                        for (j in 0 until mfc.getBlockCountInSector(index)) {
+                            // 读取当前块的数据
+                            val blockData = mfc.readBlock(blockIndex + j)
+                            // 将数据data写入当前块；注意：data必须刚好是16Byte，末尾不能用0填充，应该用空格
+                            // writeBlock（int，data）
+                            sectorCheck.append("  Block <")
+                                .append(blockIndex + j)
+                                .append("> ")
+                                .append(
+                                    StringUtils.encodeHexString(
+                                        blockData,
+                                        false
+                                    )
+                                ).append("\n")
+                        }
+                    }
+                    mfc.authenticateSectorWithKeyB(
+                        index,
+                        MifareClassic.KEY_DEFAULT
+                    ) -> {
+                        sectorCheck.append("Sector <").append(index)
+                            .append("> with KeyB auth succ\n")
+
+                        // Read block of sector
+                        val blockIndex = mfc.sectorToBlock(index)
+                        for (j in 0 until mfc.getBlockCountInSector(index)) {
+                            val blockData = mfc.readBlock(blockIndex + j)
+                            sectorCheck.append("  Block <")
+                                .append(blockIndex + j).append("> ")
+                                .append(
+                                    StringUtils.encodeHexString(
+                                        blockData,
+                                        false
+                                    )
+                                ).append("\n")
+                        }
+                    }
+                    else -> {
+                        sectorCheck.append("Sector <").append(index)
+                            .append("> auth failed\n")
+                    }
+                }
+            }
+
+        } catch (e: IOException) {
+            e.printStackTrace();
+            Toast.makeText(
+                this@NFCActivity,
+                "Try again and keep NFC tag below device",
+                Toast.LENGTH_LONG
+            ).show()
+        } finally {
+            mfc.close()
         }
     }
 
